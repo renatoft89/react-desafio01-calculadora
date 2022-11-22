@@ -27,8 +27,32 @@ const App = () => {
       setCurrentNumber('0');
       setOperation('-')
     }else{
-      const sum = Number(firstNumber) - Number(currentNumber)
-      setCurrentNumber(String(sum))
+      const sub = Number(firstNumber) - Number(currentNumber)
+      setCurrentNumber(String(sub))
+      setOperation('')
+    }
+  }
+
+  const handleMultNumber = () => {
+    if (firstNumber === '0') {
+      setFirstNumber(String(currentNumber))
+      setCurrentNumber('0');
+      setOperation('x')
+    }else{
+      const mult = Number(firstNumber) * Number(currentNumber)
+      setCurrentNumber(String(mult))
+      setOperation('')
+    }
+  }
+
+  const handleDivNumber = () => {
+    if (firstNumber === '0') {
+      setFirstNumber(String(currentNumber))
+      setCurrentNumber('0');
+      setOperation('/')
+    }else{
+      const mult = Number(firstNumber) / Number(currentNumber)
+      setCurrentNumber(String(mult))
       setOperation('')
     }
   }
@@ -52,6 +76,12 @@ const App = () => {
         case '-':
           handleSubNumber();
           break
+        case 'x':
+          handleMultNumber();
+          break
+          case '/':
+            handleDivNumber();
+            break
         default: 
           break
       }
@@ -62,12 +92,6 @@ const App = () => {
   <Container>
     <Content>
       <Input value={currentNumber}/>
-      <Row>
-        <Button label="÷" onClick={() => handleAddNumber('÷')}/>
-        <Button label="." onClick={() => handleAddNumber('')}/>
-        <Button label="x" onClick={() => handleAddNumber('x')}/>
-        <Button label="c" onClick={ handleClear }/>
-      </Row>
       <Row>
         <Button label="7" onClick={() => handleAddNumber('7')}/>
         <Button label="8" onClick={() => handleAddNumber('8')}/>
@@ -84,6 +108,15 @@ const App = () => {
         <Button label="1" onClick={() => handleAddNumber('1')}/>
         <Button label="2" onClick={() => handleAddNumber('2')}/>
         <Button label="3" onClick={() => handleAddNumber('3')}/>
+        <Button label="÷" onClick={ handleDivNumber }/>
+      </Row>
+      <Row>
+        <Button label="." onClick={() => handleAddNumber('')}/>
+        <Button label="0"  onClick={() => handleAddNumber('0')}/>        
+        <Button label="C" onClick={ handleClear }/>
+        <Button label="x" onClick={ handleMultNumber }/>
+      </Row>
+      <Row>
         <Button label="=" onClick={ handleEquals }/>
       </Row>
     </Content>
